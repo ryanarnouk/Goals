@@ -1,33 +1,99 @@
-.App {
-  text-align: center;
+.MainPage {
+  background-image: linear-gradient(141deg, #44eea1 0%, #1fc8db 51%, #2cb5e8 75%);
+  height: 100vh;
+  top: 0;
+  padding: 20px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.AddNewPage {
+  background-image: linear-gradient(141deg, #be44ee 0%, #b51fdb 51%, #9d2ce8 75%);
+  height: 100vh;
+  top: 0;
+  padding: 20px;
+  font-family: 'Montserrat';
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+
+.card {
+  width: 40%;
+  font-size: 14px;
+  background-color: white;
+  background: rgb(255, 255, 255, 0.7);
+  height: 33%;
+  border-radius: 10px;
+  padding: 1px;
+  padding-left: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.progressbar {
+  position: relative;
+  height: 20px;
+  width: 96%;
+  border-radius: 50px;
+  background: rgb(209, 209, 209);
+}
+
+.filler {
+  background: linear-gradient(141deg, #ee6be3 0%, #c028c0 51%, #a32ebb 75%);
+  height: 100%;
+  border-radius: inherit;
+  transition: width .2s ease-in;
+}
+
+.markascomplete {
+  cursor: pointer;
+  color: green;
+}
+
+.markascomplete:hover {
+  color: grey;
+  transition: color .30s ease-in-out;
+  /*vendor prefixes*/
+  -moz-transition: color  .30s ease-in-out;
+  -webkit-transition: color  .30s ease-in-out;
+}
+
+.addnew {
+  color: white;
+  background: linear-gradient(141deg, #d856cd 0%, #c028c0 51%, #a32ebb 75%);
+  padding: 14px;
+  border-radius: 100%;
+  bottom: 0; 
+  right: 0;
+  margin: 40px;
+  position: absolute;
+  cursor: pointer;
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+input[type=date] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  border-radius: 16px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  background-image: linear-gradient(141deg, #44eea1 0%, #1fc8db 51%, #2cb5e8 75%);
+  margin: 8px 0;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  outline: none;
+  cursor: pointer; 
 }
