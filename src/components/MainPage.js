@@ -8,7 +8,16 @@ class MainPage extends Component {
     if(localStorage.getItem('cards') === null || localStorage.getItem('cards') === undefined) {
       return <div style={{color: 'white', textAlign: 'center'}}><p>You do not have any goals set yet.</p><br /><p>To add one click the + button in the right corner.</p></div>;
     } else {
-      return <Card goal="The quick brown fox jumped over the lazy dog"/>;
+      var goals = JSON.parse(localStorage.getItem('cards'));
+      return (
+        <div>
+          {goals.map((a, i) => {
+            return [
+              <Card key={i} id={i} goal={a.goal}/>
+            ];
+          })}
+        </div>
+      );
     }
   }
 
@@ -16,7 +25,9 @@ class MainPage extends Component {
     return (  
       <div style={{fontFamily: 'Montserrat', fontWeight: 'bold'}} className="MainPage">
         <h1 style={{textAlign: 'center', fontWeight: 800, color: 'white', margin: 0}}>Goals</h1>
-        {this.rendercards()}
+        <div>
+          {this.rendercards()}
+        </div>
         <Link to="/new">
           <FontAwesome name="plus" className="addnew" size="2x" />
         </Link>

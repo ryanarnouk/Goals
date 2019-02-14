@@ -23,16 +23,17 @@ class Card extends Component {
 
 
   appendToStorage = (name, data) => {
+    var old = localStorage.getItem(name);
+    if(old === null) old = "";
     if(localStorage.getItem(name) === undefined || localStorage.getItem(name) === null) {
       // this function appends data to localstorage 
-      var old = localStorage.getItem(name);
-      if(old === null) old = "";
       localStorage.setItem(name, '[' + old + data + ']');
-    } else {
-      var old = localStorage.getItem(name);
-      if(old === null) old = "";
-      console.log(JSON.parse(localStorage.getItem(name)).append(data));
-      localStorage.setItem(name, old + ',' + data);
+    } else if(typeof localStorage.getItem(name) === "string"){
+      // we need to append the data because the object already exists
+      var newstring = JSON.parse(old);
+      newstring.push(JSON.parse(data));
+      localStorage.setItem('cards', JSON.stringify(newstring));
+      console.log(JSON.stringify(newstring))
     }
   }
 
@@ -44,7 +45,8 @@ class Card extends Component {
       endday: this.state.endday,
       goal: this.state.goal
     }
-    this.appendToStorage('cards', JSON.stringify(goal))
+    this.appendToStorage('cards', JSON.stringify(goal));
+
     this.setState({redirect: true})
     console.log(JSON.parse(localStorage.getItem('cards')));
   };
