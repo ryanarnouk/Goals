@@ -7,8 +7,13 @@ class Card extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      completed: false
+      completed: false,
+      percentage: null
     }
+  }
+
+  componentWillMount() {
+    this.percentage();
   }
 
   onClick = () => {
@@ -23,14 +28,25 @@ class Card extends Component {
 
   percentage = () => {
     var goals = JSON.parse(localStorage.getItem('cards'));
-    var a = moment(goals[1].startday, 'YYYY-MM-DD');
-    var b = moment(goals[1].endday, 'YYYY-MM-DD');
+
+    var a = moment(goals[0].startday, 'YYYY-MM-DD');
+    var b = moment(goals[0].endday, 'YYYY-MM-DD');
     var days = b.diff(a, 'days');
-    console.log(days);
+
+    // current day
+    const now = new Date();
+    const month = (now.getMonth() + 1).toString().padStart(2, '0');
+    const day = now.getDate().toString().padStart(0, '0');
+    
+    var c = moment(`${now.getFullYear()}-${month}-${day}`, 'YYYY-MM-DD');
+    var d = moment(goals[0].endday, 'YYYY-MM-DD');
+    var differencebetweenday = d.diff(c, 'days'); 
+
+    var n = days-differencebetweenday;
+    this.setState({percentage: Math.round(n/days * 100)});
   }
 
   render() { 
-    this.percentage();
     return (  
       <div className='card'>
         <h1 style={{color: 'black'}}>{this.props.goal}</h1>
@@ -40,7 +56,7 @@ class Card extends Component {
             <p style={{margin: 0, marginLeft: 10}}>Completed. Good Job!</p>
           </div>:
           <div>
-            <ProgressBar percentage={30}/>
+            <ProgressBar percentage={this.state.percentage}/>
             <div style={{display: 'flex'}} className="markascomplete" onClick={this.onClick}>
               <FontAwesome name="check" style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}/>
               <p style={{margin: 0, marginLeft: 10}}>Mark as completed</p>
