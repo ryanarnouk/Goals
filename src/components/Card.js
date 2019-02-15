@@ -28,9 +28,8 @@ class Card extends Component {
 
   percentage = () => {
     var goals = JSON.parse(localStorage.getItem('cards'));
-
-    var a = moment(goals[0].startday, 'YYYY-MM-DD');
-    var b = moment(goals[0].endday, 'YYYY-MM-DD');
+    var a = moment(goals[this.props.id].startday, 'YYYY-MM-DD');
+    var b = moment(goals[this.props.id].endday, 'YYYY-MM-DD');
     var days = b.diff(a, 'days');
 
     // current day
@@ -39,11 +38,11 @@ class Card extends Component {
     const day = now.getDate().toString().padStart(0, '0');
     
     var c = moment(`${now.getFullYear()}-${month}-${day}`, 'YYYY-MM-DD');
-    var d = moment(goals[0].endday, 'YYYY-MM-DD');
+    var d = moment(goals[this.props.id].endday, 'YYYY-MM-DD');
     var differencebetweenday = d.diff(c, 'days'); 
 
     var n = days-differencebetweenday;
-    this.setState({percentage: Math.round(n/days * 100)});
+    this.setState({percentage: Math.round(n/days * 100)}); 
   }
 
   render() { 

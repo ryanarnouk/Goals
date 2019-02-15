@@ -24,7 +24,7 @@ class MainPage extends Component {
   render() { 
     return (  
       <div style={{fontFamily: 'Montserrat', fontWeight: 'bold'}} className="MainPage">
-        <h1 style={{textAlign: 'center', fontWeight: 800, color: 'white', margin: 0}}>Goals</h1>
+        <h1 style={{textAlign: 'center', fontWeight: 800, color: 'white', paddingBottom: 2}}>Goals</h1>
         <div> 
           {this.rendercards()}
         </div>
