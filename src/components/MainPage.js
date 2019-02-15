@@ -10,7 +10,7 @@ class MainPage extends Component {
     } else {
       var goals = JSON.parse(localStorage.getItem('cards'));
       return (
-        <div>
+        <div className="cardouter">
           {goals.map((a, i) => {
             return [
               <Card key={i} id={i} goal={a.goal}/>
@@ -25,7 +25,7 @@ class MainPage extends Component {
     return (  
       <div style={{fontFamily: 'Montserrat', fontWeight: 'bold'}} className="MainPage">
         <h1 style={{textAlign: 'center', fontWeight: 800, color: 'white', margin: 0}}>Goals</h1>
-        <div>
+        <div> 
           {this.rendercards()}
         </div>
         <Link to="/new">
