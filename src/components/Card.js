@@ -45,10 +45,26 @@ class Card extends Component {
     this.setState({percentage: Math.round(n/days * 100)}); 
   }
 
+  delete = () => {
+    var old = JSON.parse(localStorage.getItem('cards'));
+    old.splice(this.props.id, 1);
+    localStorage.setItem('cards', JSON.stringify(old));
+    
+    // should change this to forceUpdate or update state to refresh component
+
+    if(old.length === 0) {
+      localStorage.removeItem('cards');
+    }
+    window.location.reload();
+  }
+
   render() { 
     return (  
       <div className='card'>
-        <h1 style={{color: 'black'}}>{this.props.goal}</h1>
+        <div style={{display: 'flex', alignItems: 'center'}}>
+          <h1 style={{color: 'black'}}>{this.props.goal}</h1>
+          <FontAwesome name="trash-alt" className="trash" onClick={this.delete}/>
+        </div>
         {this.state.completed ?
           <div style={{display: 'flex'}} className="markascomplete" onClick={this.onClick}>
             <FontAwesome name="check" style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}/>
