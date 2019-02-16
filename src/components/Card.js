@@ -6,8 +6,9 @@ import moment from 'moment';
 class Card extends Component {
   constructor(props) {
     super(props);
+    var goals = JSON.parse(localStorage.getItem('cards'));
     this.state = {
-      completed: false,
+      completed: goals[this.props.id].completed,
       percentage: null
     }
   }
@@ -16,14 +17,20 @@ class Card extends Component {
     this.percentage();
   }
 
-  onClick = () => {
+  completed = () => {
+    var goals = JSON.parse(localStorage.getItem('cards'));
+
     if(this.state.completed) {
       this.setState({completed: false});
       localStorage.setItem('completed' + this.props.id, this.state.completed)
+      goals[this.props.id].completed = false;
     } else {
       this.setState({completed: true});
       localStorage.setItem('completed' + this.props.id, this.state.completed)
+      goals[this.props.id].completed = true;
     }
+    localStorage.setItem('cards', JSON.stringify(goals));
+    console.log(goals[this.props.id].completed); 
   }
 
   percentage = () => {
@@ -59,6 +66,7 @@ class Card extends Component {
   }
 
   render() { 
+    console.log(this.state.completed);
     return (  
       <div className='card'>
         <div style={{display: 'flex', alignItems: 'center'}}>
@@ -66,13 +74,13 @@ class Card extends Component {
           <FontAwesome name="trash-alt" className="trash" onClick={this.delete}/>
         </div>
         {this.state.completed ?
-          <div style={{display: 'flex'}} className="markascomplete" onClick={this.onClick}>
+          <div style={{display: 'flex'}} className="markascomplete" onClick={this.completed}>
             <FontAwesome name="check" style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}/>
             <p style={{margin: 0, marginLeft: 10}}>Completed. Good Job!</p>
           </div>:
           <div>
             <ProgressBar percentage={this.state.percentage}/>
-            <div style={{display: 'flex'}} className="markascomplete" onClick={this.onClick}>
+            <div style={{display: 'flex'}} className="markascomplete" onClick={this.completed}>
               <FontAwesome name="check" style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}/>
               <p style={{margin: 0, marginLeft: 10}}>Mark as completed</p>
             </div>
